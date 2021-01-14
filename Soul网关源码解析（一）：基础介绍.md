@@ -2,15 +2,6 @@
 
 [toc]
 
-### 环境准备
-
-- JDK8+
-- maven 3.2+
-- Soul版本[2.2.1](https://github.com/dromara/soul/archive/2.2.1.zip)
-- Mysql
-
-> 笔者的maven版本是3.3.9，mysql版本是5.7，仅供参考
-
 ### 什么是网关
 
 wiki上定义：
@@ -44,11 +35,62 @@ Soul作者希望能够有一样东西像灵魂一样，保护您的微服务。
 
 #### 总体架构
 
-![avatar](..\pic\arch1.PNG)
+![avatar](../pic/arch1.PNG)
+
+### 环境准备
+
+- JDK8+
+- maven 3.2+
+- Soul版本[2.2.1](https://github.com/dromara/soul/archive/2.2.1.zip)
+- Mysql 5.x
+
+> 笔者的maven版本是3.3.9，mysql版本是5.7，仅供参考
+
+### 编译运行
+
+1. 执行如下命令进行编译
+
+```java
+mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true
+```
+
+2. 在mysql中执行路径`\soul-2.2.1\script`下soul.sql文件，执行完会看到下面的数据库表
+
+   ![avatar](../pic/db1.PNG)
+
+3. 修改路径为`soul-2.2.1\soul-admin\src\main\resources`下的配置文件application-local.yml，将其中的mysql配置修改为自己环境中搭建的mysql配置，如笔者搭建的mysql配置如下：
+
+```
+...
+  datasource:
+    url: jdbc:mysql://localhost:3306/soul?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+...
+```
+
+4. 运行
+
+   使用IDEA加载soul工程，加载完成后，可以看到IDEA识别出来SoulAdminBootstrap主程序，点击运行
+
+   ![avatar](../pic/adminbootstrap.PNG)
+
+5. 访问运行结果
+
+   浏览器访问http://127.0.0.1:9095/，可以看到如下页面
+
+   ![avatar](../pic/adminbootstrap.PNG)
+
+6. 登录soul admin系统，默认用户名/密码为：admin/123456，可以看到如下页面
+
+   ![avatar](../pic/adminbootstrap2.PNG)
+
+   这里主体菜单有两类，一类是soul自带集成的插件列表，其中就包括springcloud和dubbo，另外waf防火墙，sign签名鉴权，monitor监控，rewrite转发，rate_limiter限流，divide分组以及hystrix熔断；另一类是系统管理，包括用户管理，插件的开启关闭，认证管理以及元数据的信息。
 
 ### 小结
 
-
+本小结以网关的定义入手，以城池关口类比网关的功能，大致包括路由，防火墙，鉴权，限流以及熔断。接着引入soul网关，包括它的设计理念，现有的特性以及总体框架，接着列举了soul网关本地搭建的环境准备，最后一步一步说明，如何在本地run起soul网关，以及run起来之后，soul admin管理系统包含的菜单介绍。希望能帮到你，初识soul这样一个极致性能的网关项目。
 
 ### 参考
 
