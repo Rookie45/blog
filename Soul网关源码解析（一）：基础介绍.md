@@ -87,6 +87,19 @@ mvn clean install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=tr
    ![avatar](../pic/adminbootstrap2.PNG)
 
    这里主体菜单有两类，一类是soul自带集成的插件列表，其中就包括springcloud和dubbo，另外waf防火墙，sign签名鉴权，monitor监控，rewrite转发，rate_limiter限流，divide分组以及hystrix熔断；另一类是系统管理，包括用户管理，插件的开启关闭，认证管理以及元数据的信息。
+   
+7. 找到'..\soul-2.2.1\soul-bootstrap\target'目录，再此文件夹打开命令提示符窗口，执行如下命令启动soul-bootstrap程序
+
+```
+java  -jar .\soul-bootstrap.jar  --soul.sync.websocket.url="ws://localhost:9095/websock"
+...
+2021-01-15 00:46:33.367  INFO 10460 --- [           main] b.s.s.d.w.WebsocketSyncDataConfiguration : you use websocket sync soul data.......
+2021-01-15 00:46:33.583  INFO 10460 --- [           main] o.d.s.p.s.d.w.WebsocketSyncDataService   : websocket connection is successful.....
+2021-01-15 00:46:33.720  INFO 10460 --- [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-01-15 00:46:34.876  INFO 10460 --- [           main] o.s.b.web.embedded.netty.NettyWebServer  : Netty started on port(s): 9195
+2021-01-15 00:46:34.878  INFO 10460 --- [           main] o.d.s.b.SoulBootstrapApplication         : Started SoulBootstrapApplication in 4.212 seconds (JVM running for 4.648)
+
+```
 
 ### 小结
 
